@@ -1,15 +1,13 @@
 'use strict';
-const PAGE_ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN
-
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = ('request')
 const app = express()
 
 const VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN
-
-
-app.set('port', (process.env.PORT))
+const PAGE_ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN
+/*
+app.set('port', (process.env.PORT))*/
 
 
 app.use(bodyParser.urlencoded({extended:false}))
