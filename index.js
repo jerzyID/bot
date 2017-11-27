@@ -1,21 +1,14 @@
 'use strict';
-const express = require('express')
-const bodyParser = require('body-parser')
-const request = ('request')
-const app = express()
-
-const VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN
-const PAGE_ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN
-/*
-app.set('port', (process.env.PORT))*/
-
-
-app.use(bodyParser.urlencoded({extended:false}))
-app.use(bodyParser.json())
+const PAGE_ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN;
+// Imports dependencies and set up http server
+const 
+  request = require('request'),
+  express = require('express'),
+  body_parser = require('body-parser'),
+  app = express().use(body_parser.json()); // creates express http server
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
-
 
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {  
@@ -61,7 +54,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
   
   /** UPDATE YOUR VERIFY TOKEN **/
-  c/*onst VERIFY_TOKEN = tokenVer;*/
+  const VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN;
   
   // Parse params from the webhook verification request
   let mode = req.query['hub.mode'];
