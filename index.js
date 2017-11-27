@@ -1,9 +1,10 @@
+'use strict';
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = ('request')
 const app = express()
 
-const token = process.env.FV_VERIFY_TOKEN
+const tokenVer = process.env.FV_VERIFY_TOKEN
 const access = process.env.FB_ACCESS_TOKEN
 
 app.set('port', (process.env.PORT))
@@ -16,11 +17,28 @@ app.get('/', function (req,res) {
 	res.send('Its working')
 })
 
-app.get('/webhook/', function(req, res){
-	if(req.query['hub.verify_token'] === token) {
-			res.send(req.query['hub.challenge'])
-		}
-	res.send ('No entry')	
+app.get('/webhook', (req, res) => {
+  
+  // Parse params from the webhook verification request
+  let mode = req.query['hub.mode'];
+  let token = req.query['hub.verify_token'];
+  let challenge = req.query['hub.challenge'];
+    
+  // Check if a token and mode were sent
+  if (mode && token) {
+  
+    // Check the mode and token sent are correct
+    if (mode === 'subscribe' && token === tokenVer) {
+      
+      // Respond with 200 OK and challenge token from the request
+      console.log('WEBHOOK_VERIFIED');
+      res.status(200).send(challenge);
+    
+    } else {
+      // Responds with '403 Forbidden' if verify tokens do not match
+      res.sendStatus(403);      
+    }
+  }
 })
 
 // Accepts POST requests at /webhook endpoint
@@ -61,7 +79,7 @@ app.post('/webhook', (req, res) => {
     res.sendStatus(404);
   }
 
-});
+})
 
 app.listen(app.get('port'), function(){
 	console.log('running on port', app.get('port'))
