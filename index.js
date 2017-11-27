@@ -4,8 +4,8 @@ const bodyParser = require('body-parser')
 const request = ('request')
 const app = express()
 
-const tokenVer = process.env.FB_VERIFY_TOKEN
-const access = process.env.FB_ACCESS_TOKEN
+const VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN
+const PAGE_ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN
 
 app.set('port', (process.env.PORT))
 
@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
 // Sets server port and logs message on success
-app.listen(process.env.PORT, () => console.log('webhook is listening'));
+app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {  
@@ -60,7 +60,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
   
   /** UPDATE YOUR VERIFY TOKEN **/
-  const VERIFY_TOKEN = tokenVer;
+  c/*onst VERIFY_TOKEN = tokenVer;*/
   
   // Parse params from the webhook verification request
   let mode = req.query['hub.mode'];
@@ -156,7 +156,7 @@ function callSendAPI(sender_psid, response) {
   // Send the HTTP request to the Messenger Platform
   request({
     "uri": "https://graph.facebook.com/v2.6/me/messages",
-    "qs": { "access_token": access },
+    "qs": { "access_token": PAGE_ACCESS_TOKEN },
     "method": "POST",
     "json": request_body
   }, (err, res, body) => {
