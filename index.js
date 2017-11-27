@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const request = ('request')
 const app = express()
 
-const tokenVer = process.env.FV_VERIFY_TOKEN
+const tokenVer = process.env.FB_VERIFY_TOKEN
 const access = process.env.FB_ACCESS_TOKEN
 
 app.set('port', (process.env.PORT))
