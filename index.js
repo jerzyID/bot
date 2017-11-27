@@ -116,6 +116,7 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
+    console.log(attachment_url);
   } 
   
   // Send the response message
