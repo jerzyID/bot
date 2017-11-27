@@ -4,8 +4,8 @@ const bodyParser = require('body-parser')
 const request = ('request')
 const app = express()
 
-const VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN
-const PAGE_ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN
+const VERIFY_TOKEN = 'my_token'
+const PAGE_ACCESS_TOKEN = 'EAACNLgJommsBAIszLPPiKXZCcZCsLfxVf5t3rgoirj0IUiG5lo7zhTf93IxpqnY9hVo5ZCFPx5rBTJQykUmc8WCg3ZCkvbEaoufZAGODGFDlqJOxRF4gIFCIN10yCSnXCnZAjo3yeOkraAFsV6nrv9nkhUmguCEa1RnwQg5X1YwihuMo5wGFJ0'
 
 app.set('port', (process.env.PORT))
 
