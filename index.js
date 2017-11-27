@@ -1,11 +1,13 @@
 'use strict';
+const PAGE_ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = ('request')
 const app = express()
 
-const VERIFY_TOKEN = 'my_token'
-const PAGE_ACCESS_TOKEN = 'EAACNLgJommsBAIszLPPiKXZCcZCsLfxVf5t3rgoirj0IUiG5lo7zhTf93IxpqnY9hVo5ZCFPx5rBTJQykUmc8WCg3ZCkvbEaoufZAGODGFDlqJOxRF4gIFCIN10yCSnXCnZAjo3yeOkraAFsV6nrv9nkhUmguCEa1RnwQg5X1YwihuMo5wGFJ0'
+const VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN
+
 
 app.set('port', (process.env.PORT))
 
@@ -15,6 +17,7 @@ app.use(bodyParser.json())
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+
 
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {  
